@@ -170,6 +170,7 @@ def sair():
         sleep(3)
         exit()
     elif choice == 'n':
+        print('\033[31;1mCancelando operação...\033[0m')
         return 0
     else:
         print('\033[31;1mERRO! Opção inválida\033[0m')
@@ -178,15 +179,16 @@ def sair():
 def mostrar_todos(choice):
 
     #Verifica se existem usuários.
-    if choice == 1:
-        if len(users) == 0:
-            print('\033[31;1mVocê não tem usuários cadastrados.\033[0')
-        else:
-            #Mostra todos os usuários em ordem de cadastro.
+    validation = 0
+    if len(users) == 0:
+        print('\033[31;1mVocê não tem usuários cadastrados.\033[0m')
+        validation = 1
+    if choice == 1:    
+        #Mostra todos os usuários em ordem de cadastro.
+        if validation == 0:
             print('\033[32;1mAqui estão todos os usuarios em ordem de cadastro!\033[0m')
             linha(30)
             for user in users:
-
                 #Retira as aspas do nome de usuário.
                 user2 = user[0]
                 user2 = user2.replace("'",'')
@@ -194,17 +196,19 @@ def mostrar_todos(choice):
             linha(30)
     #Mostra os usuários em ordem alfabética
     elif choice == 2:
-        print('Aqui estão todos os usuários em ordem alfabética')
-        user_alfa = sorted(users, key=lambda users: users[0])
-        for user in user_alfa:
-            print(f'Usuário: \033[34;1m{user[0]}\033[0m | ID: \033[34;1m{user[1]}\033[0m')
+        if validation == 0:
+            print('Aqui estão todos os usuários em ordem alfabética')
+            user_alfa = sorted(users, key=lambda users: users[0])
+            for user in user_alfa:
+                print(f'Usuário: \033[34;1m{user[0]}\033[0m | ID: \033[34;1m{user[1]}\033[0m')
 
     #Mostra os usuários em ordem de ID (Crescente)
     elif choice == 3:
-            user_num = sorted(users, key=lambda users: users[1])
-            print('Aqui estão todos os usuários em ordem de ID (Crescente)')
-            for user in user_num:
-                print(f'Usuário: \033[34;1m{user[0]}\033[0m | ID: \033[34;1m{user[1]}\033[0m')
+            if validation == 0:
+                user_num = sorted(users, key=lambda users: users[1])
+                print('Aqui estão todos os usuários em ordem de ID (Crescente)')
+                for user in user_num:
+                    print(f'Usuário: \033[34;1m{user[0]}\033[0m | ID: \033[34;1m{user[1]}\033[0m')
 #Função para criar linhas de separação.
 def linha(qnt):
     print('\033[33;1m\n'+'='*qnt+'\n\033[0m')
