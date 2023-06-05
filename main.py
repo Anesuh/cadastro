@@ -14,7 +14,7 @@ from time import sleep
 import psycopg2, psycopg2.errors
 
 from getpass import getpass
-
+from os import system
 #Lista com caracteres especiais e senhas comuns
 caracteres_especiais = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '`', '~', '|', '{', '}', '[', ']', ';', ':', '"', "'", '<', '>', '?', '/','.']
 
@@ -253,10 +253,9 @@ cont = 0
 
 while True:
     #Exibe o menu na primeira vez que o código for rodado.
-    if cont <= 0:
-        print(menu())
     
     while True:
+        system('cls')
         #Validação de entrada do usuário.
         try:
             sleep(0.5)
@@ -314,7 +313,7 @@ while True:
         while True:
             try:
                 #Pede o ID do usuário.
-                id = int(input('Qual o id que deseja remover? '))
+                id = int(input('Qual usuário deseja buscar? '))
                 break
             except ValueError as erro:
                 print('\033[31;1mERRO! Você deve inserir um número.\033[0m')
@@ -371,6 +370,6 @@ while True:
         print('\033[31;1mEscolha invalida.\033[0m')
     
     #Aumenta o contador.
-    cont += 1
+    sleep(2)
 
 #Fim do programa
